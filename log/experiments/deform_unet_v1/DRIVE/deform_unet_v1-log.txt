@@ -1,0 +1,432 @@
+[i] Data name:             DRIVE
+[i] epochs:                100
+[i] Batch size:            60
+[i] algoritm:              deform_unet_v1
+[i] gpu:                   0
+[i] mode:                  gpu
+[i] learning rate:         0.001
+[i] optimizer:             Adam
+[i] finetuning:            False
+lr:0.001
+Number of model parameters: 883442
+DUNetV1V2(
+  (inc): inconv(
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(1, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (down1): deform_down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_deform_conv(
+        (conv): Sequential(
+          (0): DeformConv2d(
+            (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+            (conv): Conv2d(16, 32, kernel_size=(3, 3), stride=(3, 3), bias=False)
+            (p_conv): Conv2d(16, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): DeformConv2d(
+            (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+            (conv): Conv2d(32, 32, kernel_size=(3, 3), stride=(3, 3), bias=False)
+            (p_conv): Conv2d(32, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down2): deform_down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_deform_conv(
+        (conv): Sequential(
+          (0): DeformConv2d(
+            (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+            (conv): Conv2d(32, 64, kernel_size=(3, 3), stride=(3, 3), bias=False)
+            (p_conv): Conv2d(32, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): DeformConv2d(
+            (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+            (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(3, 3), bias=False)
+            (p_conv): Conv2d(64, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down3): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (down4): down(
+    (mpconv): Sequential(
+      (0): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (1): double_conv(
+        (conv): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+          (3): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (4): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (5): ReLU(inplace=True)
+        )
+      )
+    )
+  )
+  (up1): up(
+    (up): Upsample(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up2): up(
+    (up): Upsample(scale_factor=2.0, mode=bilinear)
+    (conv): double_conv(
+      (conv): Sequential(
+        (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up3): deform_up(
+    (up): Upsample(scale_factor=2.0, mode=bilinear)
+    (conv): double_deform_conv(
+      (conv): Sequential(
+        (0): DeformConv2d(
+          (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+          (conv): Conv2d(64, 16, kernel_size=(3, 3), stride=(3, 3), bias=False)
+          (p_conv): Conv2d(64, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): DeformConv2d(
+          (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+          (conv): Conv2d(16, 16, kernel_size=(3, 3), stride=(3, 3), bias=False)
+          (p_conv): Conv2d(16, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+        (4): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (up4): deform_up(
+    (up): Upsample(scale_factor=2.0, mode=bilinear)
+    (conv): double_deform_conv(
+      (conv): Sequential(
+        (0): DeformConv2d(
+          (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+          (conv): Conv2d(32, 16, kernel_size=(3, 3), stride=(3, 3), bias=False)
+          (p_conv): Conv2d(32, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+        (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+        (3): DeformConv2d(
+          (zero_padding): ZeroPad2d(padding=(0, 0, 0, 0), value=0.0)
+          (conv): Conv2d(16, 16, kernel_size=(3, 3), stride=(3, 3), bias=False)
+          (p_conv): Conv2d(16, 18, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+        (4): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (5): ReLU(inplace=True)
+      )
+    )
+  )
+  (outc): Conv2d(17, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+=================================================================
+Layer (type:depth-idx)                   Param #
+=================================================================
+├─inconv: 1-1                            --
+|    └─double_conv: 2-1                  --
+|    |    └─Sequential: 3-1              2,544
+├─deform_down: 1-2                       --
+|    └─Sequential: 2-2                   --
+|    |    └─MaxPool2d: 3-2               --
+|    |    └─double_deform_conv: 3-3      21,764
+├─deform_down: 1-3                       --
+|    └─Sequential: 2-3                   --
+|    |    └─MaxPool2d: 3-4               --
+|    |    └─double_deform_conv: 3-5      71,140
+├─down: 1-4                              --
+|    └─Sequential: 2-4                   --
+|    |    └─MaxPool2d: 3-6               --
+|    |    └─double_conv: 3-7             221,952
+├─down: 1-5                              --
+|    └─Sequential: 2-5                   --
+|    |    └─MaxPool2d: 3-8               --
+|    |    └─double_conv: 3-9             295,680
+├─up: 1-6                                --
+|    └─Upsample: 2-6                     --
+|    └─double_conv: 2-7                  --
+|    |    └─Sequential: 3-10             184,704
+├─up: 1-7                                --
+|    └─Upsample: 2-8                     --
+|    └─double_conv: 2-9                  --
+|    |    └─Sequential: 3-11             46,272
+├─deform_up: 1-8                         --
+|    └─Upsample: 2-10                    --
+|    └─double_deform_conv: 2-11          --
+|    |    └─Sequential: 3-12             24,580
+├─deform_up: 1-9                         --
+|    └─Upsample: 2-12                    --
+|    └─double_deform_conv: 2-13          --
+|    |    └─Sequential: 3-13             14,788
+├─Conv2d: 1-10                           18
+=================================================================
+Total params: 883,442
+Trainable params: 883,442
+Non-trainable params: 0
+=================================================================
+
+train images/masks shape:
+(10, 1, 584, 565)
+train images range (min-max): 0.0 - 1.0
+train masks are within 0-1
+
+patches per full image: 20000
+
+train PATCHES images/masks shape:
+(200000, 1, 48, 48)
+train PATCHES images range (min-max): 0.0 - 1.0
+number of train: 180000
+number of test: 20000
+Epoch: [0/100][2999/3000] printfreq time 651.316 (avg:651.316) 
+TEST Epoch: [0/100]Test Epoch Time 30.249 (avg:30.249) Acc 0.961936 (avg:0.953022) Loss 0.105774 (avg:0.128154) 
+Epoch: [1/100][2999/3000] printfreq time 651.426 (avg:651.426) 
+TEST Epoch: [1/100]Test Epoch Time 30.243 (avg:30.243) Acc 0.963542 (avg:0.955968) Loss 0.100225 (avg:0.121827) 
+Epoch: [2/100][2999/3000] printfreq time 651.666 (avg:651.666) 
+TEST Epoch: [2/100]Test Epoch Time 30.265 (avg:30.265) Acc 0.942187 (avg:0.956244) Loss 0.156218 (avg:0.122282) 
+Epoch: [3/100][2999/3000] printfreq time 651.398 (avg:651.398) 
+TEST Epoch: [3/100]Test Epoch Time 30.244 (avg:30.244) Acc 0.950564 (avg:0.957073) Loss 0.135165 (avg:0.120677) 
+Epoch: [4/100][2999/3000] printfreq time 651.321 (avg:651.321) 
+TEST Epoch: [4/100]Test Epoch Time 30.237 (avg:30.237) Acc 0.950586 (avg:0.956063) Loss 0.143520 (avg:0.128669) 
+Epoch: [5/100][2999/3000] printfreq time 655.047 (avg:655.047) 
+TEST Epoch: [5/100]Test Epoch Time 30.497 (avg:30.497) Acc 0.958160 (avg:0.955611) Loss 0.114787 (avg:0.129841) 
+Epoch: [6/100][2999/3000] printfreq time 651.287 (avg:651.287) 
+TEST Epoch: [6/100]Test Epoch Time 30.276 (avg:30.276) Acc 0.958138 (avg:0.956188) Loss 0.118570 (avg:0.131402) 
+Epoch: [7/100][2999/3000] printfreq time 651.172 (avg:651.172) 
+TEST Epoch: [7/100]Test Epoch Time 30.244 (avg:30.244) Acc 0.957747 (avg:0.955525) Loss 0.120487 (avg:0.133212) 
+Epoch: [8/100][2999/3000] printfreq time 650.907 (avg:650.907) 
+TEST Epoch: [8/100]Test Epoch Time 30.251 (avg:30.251) Acc 0.954991 (avg:0.955775) Loss 0.128389 (avg:0.140170) 
+Epoch: [9/100][2999/3000] printfreq time 651.037 (avg:651.037) 
+TEST Epoch: [9/100]Test Epoch Time 30.239 (avg:30.239) Acc 0.957812 (avg:0.956201) Loss 0.142130 (avg:0.137307) 
+Epoch: [10/100][2999/3000] printfreq time 650.798 (avg:650.798) 
+TEST Epoch: [10/100]Test Epoch Time 30.247 (avg:30.247) Acc 0.949154 (avg:0.955659) Loss 0.148648 (avg:0.138979) 
+Epoch: [11/100][2999/3000] printfreq time 653.441 (avg:653.441) 
+TEST Epoch: [11/100]Test Epoch Time 30.643 (avg:30.643) Acc 0.960634 (avg:0.956145) Loss 0.119578 (avg:0.139693) 
+Epoch: [12/100][2999/3000] printfreq time 650.601 (avg:650.601) 
+TEST Epoch: [12/100]Test Epoch Time 30.237 (avg:30.237) Acc 0.963607 (avg:0.955363) Loss 0.123075 (avg:0.146197) 
+Epoch: [13/100][2999/3000] printfreq time 650.754 (avg:650.754) 
+TEST Epoch: [13/100]Test Epoch Time 30.234 (avg:30.234) Acc 0.965213 (avg:0.954714) Loss 0.105307 (avg:0.150373) 
+Epoch: [14/100][2999/3000] printfreq time 650.513 (avg:650.513) 
+TEST Epoch: [14/100]Test Epoch Time 30.248 (avg:30.248) Acc 0.964214 (avg:0.954854) Loss 0.139151 (avg:0.148930) 
+Epoch: [15/100][2999/3000] printfreq time 650.376 (avg:650.376) 
+TEST Epoch: [15/100]Test Epoch Time 30.245 (avg:30.245) Acc 0.922830 (avg:0.955588) Loss 0.290585 (avg:0.141251) 
+Epoch: [16/100][2999/3000] printfreq time 650.453 (avg:650.453) 
+TEST Epoch: [16/100]Test Epoch Time 30.239 (avg:30.239) Acc 0.952409 (avg:0.955092) Loss 0.158331 (avg:0.147214) 
+Epoch: [17/100][2999/3000] printfreq time 655.961 (avg:655.961) 
+TEST Epoch: [17/100]Test Epoch Time 30.206 (avg:30.206) Acc 0.938997 (avg:0.955367) Loss 0.186146 (avg:0.150643) 
+Epoch: [18/100][2999/3000] printfreq time 649.282 (avg:649.282) 
+TEST Epoch: [18/100]Test Epoch Time 30.135 (avg:30.135) Acc 0.961957 (avg:0.955534) Loss 0.119865 (avg:0.145798) 
+Epoch: [19/100][2999/3000] printfreq time 649.337 (avg:649.337) 
+TEST Epoch: [19/100]Test Epoch Time 30.131 (avg:30.131) Acc 0.939258 (avg:0.955073) Loss 0.207129 (avg:0.152221) 
+Epoch    20: reducing learning rate of group 0 to 1.0000e-04.
+Epoch: [20/100][2999/3000] printfreq time 649.244 (avg:649.244) 
+TEST Epoch: [20/100]Test Epoch Time 30.152 (avg:30.152) Acc 0.943945 (avg:0.955040) Loss 0.200117 (avg:0.156077) 
+Epoch: [21/100][2999/3000] printfreq time 649.526 (avg:649.526) 
+TEST Epoch: [21/100]Test Epoch Time 30.126 (avg:30.126) Acc 0.944010 (avg:0.955081) Loss 0.202108 (avg:0.157366) 
+Epoch: [22/100][2999/3000] printfreq time 649.285 (avg:649.285) 
+TEST Epoch: [22/100]Test Epoch Time 30.144 (avg:30.144) Acc 0.949067 (avg:0.955304) Loss 0.162337 (avg:0.157928) 
+Epoch: [23/100][2999/3000] printfreq time 652.201 (avg:652.201) 
+TEST Epoch: [23/100]Test Epoch Time 30.596 (avg:30.596) Acc 0.953537 (avg:0.954911) Loss 0.156693 (avg:0.157414) 
+Epoch: [24/100][2999/3000] printfreq time 649.740 (avg:649.740) 
+TEST Epoch: [24/100]Test Epoch Time 30.150 (avg:30.150) Acc 0.956076 (avg:0.954994) Loss 0.170477 (avg:0.159131) 
+Epoch: [25/100][2999/3000] printfreq time 649.949 (avg:649.949) 
+TEST Epoch: [25/100]Test Epoch Time 30.163 (avg:30.163) Acc 0.957031 (avg:0.955483) Loss 0.164290 (avg:0.161369) 
+Epoch: [26/100][2999/3000] printfreq time 649.730 (avg:649.730) 
+TEST Epoch: [26/100]Test Epoch Time 30.168 (avg:30.168) Acc 0.957878 (avg:0.955071) Loss 0.132437 (avg:0.160534) 
+Epoch: [27/100][2999/3000] printfreq time 649.569 (avg:649.569) 
+TEST Epoch: [27/100]Test Epoch Time 30.149 (avg:30.149) Acc 0.945334 (avg:0.954926) Loss 0.195082 (avg:0.161484) 
+Epoch: [28/100][2999/3000] printfreq time 649.586 (avg:649.586) 
+TEST Epoch: [28/100]Test Epoch Time 30.180 (avg:30.180) Acc 0.959722 (avg:0.955431) Loss 0.157253 (avg:0.160380) 
+Epoch: [29/100][2999/3000] printfreq time 651.689 (avg:651.689) 
+TEST Epoch: [29/100]Test Epoch Time 30.268 (avg:30.268) Acc 0.967904 (avg:0.955122) Loss 0.109271 (avg:0.161184) 
+Epoch: [30/100][2999/3000] printfreq time 649.612 (avg:649.612) 
+TEST Epoch: [30/100]Test Epoch Time 30.174 (avg:30.174) Acc 0.937652 (avg:0.954879) Loss 0.228868 (avg:0.160470) 
+Epoch: [31/100][2999/3000] printfreq time 649.687 (avg:649.687) 
+TEST Epoch: [31/100]Test Epoch Time 30.186 (avg:30.186) Acc 0.958919 (avg:0.955145) Loss 0.136288 (avg:0.161951) 
+Epoch: [32/100][2999/3000] printfreq time 649.747 (avg:649.747) 
+TEST Epoch: [32/100]Test Epoch Time 30.166 (avg:30.166) Acc 0.957183 (avg:0.955293) Loss 0.136988 (avg:0.160296) 
+Epoch: [33/100][2999/3000] printfreq time 649.752 (avg:649.752) 
+TEST Epoch: [33/100]Test Epoch Time 30.168 (avg:30.168) Acc 0.969748 (avg:0.955156) Loss 0.092976 (avg:0.159616) 
+Epoch: [34/100][2999/3000] printfreq time 652.461 (avg:652.461) 
+TEST Epoch: [34/100]Test Epoch Time 30.222 (avg:30.222) Acc 0.937804 (avg:0.955213) Loss 0.256638 (avg:0.161857) 
+Epoch: [35/100][2999/3000] printfreq time 651.788 (avg:651.788) 
+TEST Epoch: [35/100]Test Epoch Time 30.218 (avg:30.218) Acc 0.937348 (avg:0.955400) Loss 0.217564 (avg:0.161612) 
+Epoch    36: reducing learning rate of group 0 to 1.0000e-05.
+Epoch: [36/100][2999/3000] printfreq time 649.373 (avg:649.373) 
+TEST Epoch: [36/100]Test Epoch Time 30.132 (avg:30.132) Acc 0.940256 (avg:0.955299) Loss 0.224935 (avg:0.162126) 
+Epoch: [37/100][2999/3000] printfreq time 649.589 (avg:649.589) 
+TEST Epoch: [37/100]Test Epoch Time 30.168 (avg:30.168) Acc 0.950933 (avg:0.955207) Loss 0.171975 (avg:0.163055) 
+Epoch: [38/100][2999/3000] printfreq time 649.392 (avg:649.392) 
+TEST Epoch: [38/100]Test Epoch Time 30.149 (avg:30.149) Acc 0.956293 (avg:0.955023) Loss 0.182085 (avg:0.162665) 
+Epoch: [39/100][2999/3000] printfreq time 649.425 (avg:649.425) 
+TEST Epoch: [39/100]Test Epoch Time 30.148 (avg:30.148) Acc 0.962652 (avg:0.955160) Loss 0.118556 (avg:0.162243) 
+Epoch: [40/100][2999/3000] printfreq time 649.715 (avg:649.715) 
+TEST Epoch: [40/100]Test Epoch Time 30.112 (avg:30.112) Acc 0.965951 (avg:0.955239) Loss 0.126200 (avg:0.162436) 
+Epoch: [41/100][2999/3000] printfreq time 651.584 (avg:651.584) 
+TEST Epoch: [41/100]Test Epoch Time 30.359 (avg:30.359) Acc 0.951042 (avg:0.955013) Loss 0.164421 (avg:0.162353) 
+Epoch: [42/100][2999/3000] printfreq time 650.490 (avg:650.490) 
+TEST Epoch: [42/100]Test Epoch Time 30.261 (avg:30.261) Acc 0.966840 (avg:0.955265) Loss 0.123429 (avg:0.163023) 
+Epoch: [43/100][2999/3000] printfreq time 650.524 (avg:650.524) 
+TEST Epoch: [43/100]Test Epoch Time 30.249 (avg:30.249) Acc 0.956272 (avg:0.954856) Loss 0.140767 (avg:0.161889) 
+Epoch: [44/100][2999/3000] printfreq time 650.487 (avg:650.487) 
+TEST Epoch: [44/100]Test Epoch Time 30.250 (avg:30.250) Acc 0.955252 (avg:0.955053) Loss 0.147610 (avg:0.163204) 
+Epoch: [45/100][2999/3000] printfreq time 650.580 (avg:650.580) 
+TEST Epoch: [45/100]Test Epoch Time 30.316 (avg:30.316) Acc 0.970768 (avg:0.955100) Loss 0.102189 (avg:0.162723) 
+Epoch: [46/100][2999/3000] printfreq time 650.660 (avg:650.660) 
+TEST Epoch: [46/100]Test Epoch Time 30.241 (avg:30.241) Acc 0.953885 (avg:0.954946) Loss 0.189290 (avg:0.163095) 
+Epoch: [47/100][2999/3000] printfreq time 653.399 (avg:653.399) 
+TEST Epoch: [47/100]Test Epoch Time 30.490 (avg:30.490) Acc 0.952951 (avg:0.955080) Loss 0.205667 (avg:0.162638) 
+Epoch: [48/100][2999/3000] printfreq time 650.848 (avg:650.848) 
+TEST Epoch: [48/100]Test Epoch Time 30.281 (avg:30.281) Acc 0.954731 (avg:0.954992) Loss 0.171058 (avg:0.163194) 
+Epoch: [49/100][2999/3000] printfreq time 650.935 (avg:650.935) 
+TEST Epoch: [49/100]Test Epoch Time 30.272 (avg:30.272) Acc 0.957465 (avg:0.955093) Loss 0.155657 (avg:0.164194) 
+Epoch: [50/100][2999/3000] printfreq time 653.396 (avg:653.396) 
+TEST Epoch: [50/100]Test Epoch Time 30.280 (avg:30.280) Acc 0.957444 (avg:0.955173) Loss 0.169723 (avg:0.163759) 
+Epoch: [51/100][2999/3000] printfreq time 650.753 (avg:650.753) 
+TEST Epoch: [51/100]Test Epoch Time 30.263 (avg:30.263) Acc 0.962695 (avg:0.955093) Loss 0.109095 (avg:0.163327) 
+Epoch    52: reducing learning rate of group 0 to 1.0000e-06.
+Epoch: [52/100][2999/3000] printfreq time 650.987 (avg:650.987) 
+TEST Epoch: [52/100]Test Epoch Time 30.323 (avg:30.323) Acc 0.968424 (avg:0.955163) Loss 0.104507 (avg:0.164531) 
+Epoch: [53/100][2999/3000] printfreq time 653.626 (avg:653.626) 
+TEST Epoch: [53/100]Test Epoch Time 30.705 (avg:30.705) Acc 0.949544 (avg:0.955033) Loss 0.182938 (avg:0.164067) 
+Epoch: [54/100][2999/3000] printfreq time 650.538 (avg:650.538) 
+TEST Epoch: [54/100]Test Epoch Time 30.264 (avg:30.264) Acc 0.966081 (avg:0.955003) Loss 0.119260 (avg:0.163798) 
+Epoch: [55/100][2999/3000] printfreq time 650.583 (avg:650.583) 
+TEST Epoch: [55/100]Test Epoch Time 30.266 (avg:30.266) Acc 0.967556 (avg:0.955020) Loss 0.125138 (avg:0.162608) 
+Epoch: [56/100][2999/3000] printfreq time 650.542 (avg:650.542) 
+TEST Epoch: [56/100]Test Epoch Time 30.309 (avg:30.309) Acc 0.946571 (avg:0.955126) Loss 0.182445 (avg:0.164068) 
+Epoch: [57/100][2999/3000] printfreq time 650.867 (avg:650.867) 
+TEST Epoch: [57/100]Test Epoch Time 30.259 (avg:30.259) Acc 0.949718 (avg:0.955121) Loss 0.174742 (avg:0.163431) 
+Epoch: [58/100][2999/3000] printfreq time 650.606 (avg:650.606) 
+TEST Epoch: [58/100]Test Epoch Time 30.301 (avg:30.301) Acc 0.955339 (avg:0.955142) Loss 0.146074 (avg:0.164389) 
+Epoch: [59/100][2999/3000] printfreq time 651.946 (avg:651.946) 
+TEST Epoch: [59/100]Test Epoch Time 30.339 (avg:30.339) Acc 0.959744 (avg:0.955087) Loss 0.134544 (avg:0.163869) 
+Epoch: [60/100][2999/3000] printfreq time 650.504 (avg:650.504) 
+TEST Epoch: [60/100]Test Epoch Time 30.260 (avg:30.260) Acc 0.946788 (avg:0.955058) Loss 0.218024 (avg:0.164398) 
+Epoch: [61/100][2999/3000] printfreq time 650.738 (avg:650.738) 
+TEST Epoch: [61/100]Test Epoch Time 30.252 (avg:30.252) Acc 0.948850 (avg:0.955008) Loss 0.184517 (avg:0.163626) 
+Epoch: [62/100][2999/3000] printfreq time 650.446 (avg:650.446) 
+TEST Epoch: [62/100]Test Epoch Time 30.253 (avg:30.253) Acc 0.939345 (avg:0.954866) Loss 0.252048 (avg:0.163907) 
+Epoch: [63/100][2999/3000] printfreq time 650.579 (avg:650.579) 
+TEST Epoch: [63/100]Test Epoch Time 30.271 (avg:30.271) Acc 0.953190 (avg:0.955048) Loss 0.177139 (avg:0.163694) 
+Epoch: [64/100][2999/3000] printfreq time 650.552 (avg:650.552) 
+TEST Epoch: [64/100]Test Epoch Time 30.321 (avg:30.321) Acc 0.948416 (avg:0.955017) Loss 0.190560 (avg:0.163695) 
+Epoch: [65/100][2999/3000] printfreq time 655.276 (avg:655.276) 
+TEST Epoch: [65/100]Test Epoch Time 30.179 (avg:30.179) Acc 0.953147 (avg:0.955025) Loss 0.173701 (avg:0.164468) 
+Epoch: [66/100][2999/3000] printfreq time 649.405 (avg:649.405) 
+TEST Epoch: [66/100]Test Epoch Time 30.158 (avg:30.158) Acc 0.945508 (avg:0.954998) Loss 0.195390 (avg:0.164325) 
+Epoch: [67/100][2999/3000] printfreq time 649.514 (avg:649.514) 
+TEST Epoch: [67/100]Test Epoch Time 30.158 (avg:30.158) Acc 0.957487 (avg:0.955086) Loss 0.126285 (avg:0.163554) 
+Epoch    68: reducing learning rate of group 0 to 1.0000e-07.
+Epoch: [68/100][2999/3000] printfreq time 649.422 (avg:649.422) 
+TEST Epoch: [68/100]Test Epoch Time 30.195 (avg:30.195) Acc 0.930751 (avg:0.954941) Loss 0.264964 (avg:0.164691) 
+Epoch: [69/100][2999/3000] printfreq time 649.807 (avg:649.807) 
+TEST Epoch: [69/100]Test Epoch Time 30.147 (avg:30.147) Acc 0.953385 (avg:0.955154) Loss 0.183059 (avg:0.163962) 
+Epoch: [70/100][2999/3000] printfreq time 649.466 (avg:649.466) 
+TEST Epoch: [70/100]Test Epoch Time 30.160 (avg:30.160) Acc 0.971289 (avg:0.955047) Loss 0.093704 (avg:0.164579) 
+Epoch: [71/100][2999/3000] printfreq time 652.129 (avg:652.129) 
+TEST Epoch: [71/100]Test Epoch Time 30.484 (avg:30.484) Acc 0.942622 (avg:0.954824) Loss 0.219260 (avg:0.163366) 
+Epoch: [72/100][2999/3000] printfreq time 650.576 (avg:650.576) 
+TEST Epoch: [72/100]Test Epoch Time 30.252 (avg:30.252) Acc 0.945421 (avg:0.954835) Loss 0.194993 (avg:0.163553) 
+Epoch: [73/100][2999/3000] printfreq time 650.744 (avg:650.744) 
+TEST Epoch: [73/100]Test Epoch Time 30.255 (avg:30.255) Acc 0.965061 (avg:0.955103) Loss 0.148665 (avg:0.163593) 
+Epoch: [74/100][2999/3000] printfreq time 650.612 (avg:650.612) 
+TEST Epoch: [74/100]Test Epoch Time 30.279 (avg:30.279) Acc 0.961914 (avg:0.954985) Loss 0.120443 (avg:0.163714) 
+Epoch: [75/100][2999/3000] printfreq time 650.483 (avg:650.483) 
+TEST Epoch: [75/100]Test Epoch Time 30.261 (avg:30.261) Acc 0.962760 (avg:0.954944) Loss 0.125661 (avg:0.163254) 
+Epoch: [76/100][2999/3000] printfreq time 652.254 (avg:652.254) 
+TEST Epoch: [76/100]Test Epoch Time 30.260 (avg:30.260) Acc 0.947808 (avg:0.955009) Loss 0.214162 (avg:0.163063) 
+Epoch: [77/100][2999/3000] printfreq time 655.442 (avg:655.442) 
+TEST Epoch: [77/100]Test Epoch Time 30.527 (avg:30.527) Acc 0.957444 (avg:0.955196) Loss 0.163630 (avg:0.163985) 
+Epoch: [78/100][2999/3000] printfreq time 650.435 (avg:650.435) 
+TEST Epoch: [78/100]Test Epoch Time 30.250 (avg:30.250) Acc 0.956554 (avg:0.955000) Loss 0.139447 (avg:0.163666) 
+Epoch: [79/100][2999/3000] printfreq time 650.520 (avg:650.520) 
+TEST Epoch: [79/100]Test Epoch Time 30.261 (avg:30.261) Acc 0.958594 (avg:0.955104) Loss 0.146374 (avg:0.164086) 
+Epoch: [80/100][2999/3000] printfreq time 650.666 (avg:650.666) 
+TEST Epoch: [80/100]Test Epoch Time 30.262 (avg:30.262) Acc 0.948611 (avg:0.955130) Loss 0.180801 (avg:0.164949) 
+Epoch: [81/100][2999/3000] printfreq time 650.781 (avg:650.781) 
+TEST Epoch: [81/100]Test Epoch Time 30.271 (avg:30.271) Acc 0.962977 (avg:0.955020) Loss 0.129321 (avg:0.163500) 
+Epoch: [82/100][2999/3000] printfreq time 652.218 (avg:652.218) 
+TEST Epoch: [82/100]Test Epoch Time 30.299 (avg:30.299) Acc 0.946463 (avg:0.954896) Loss 0.200201 (avg:0.163275) 
+Epoch: [83/100][2999/3000] printfreq time 652.531 (avg:652.531) 
+TEST Epoch: [83/100]Test Epoch Time 30.286 (avg:30.286) Acc 0.946940 (avg:0.955054) Loss 0.191464 (avg:0.163436) 
+Epoch    84: reducing learning rate of group 0 to 1.0000e-08.
+Epoch: [84/100][2999/3000] printfreq time 650.552 (avg:650.552) 
+TEST Epoch: [84/100]Test Epoch Time 30.272 (avg:30.272) Acc 0.959787 (avg:0.955066) Loss 0.148643 (avg:0.163354) 
+Epoch: [85/100][2999/3000] printfreq time 650.717 (avg:650.717) 
+TEST Epoch: [85/100]Test Epoch Time 30.267 (avg:30.267) Acc 0.955773 (avg:0.955000) Loss 0.134357 (avg:0.163738) 
+Epoch: [86/100][2999/3000] printfreq time 650.487 (avg:650.487) 
+TEST Epoch: [86/100]Test Epoch Time 30.248 (avg:30.248) Acc 0.946680 (avg:0.955124) Loss 0.192045 (avg:0.163712) 
+Epoch: [87/100][2999/3000] printfreq time 650.641 (avg:650.641) 
+TEST Epoch: [87/100]Test Epoch Time 30.278 (avg:30.278) Acc 0.958615 (avg:0.955240) Loss 0.156289 (avg:0.163631) 
+Epoch: [88/100][2999/3000] printfreq time 650.554 (avg:650.554) 
+TEST Epoch: [88/100]Test Epoch Time 30.266 (avg:30.266) Acc 0.958529 (avg:0.955069) Loss 0.155187 (avg:0.163986) 
+Epoch: [89/100][2999/3000] printfreq time 655.179 (avg:655.179) 
+TEST Epoch: [89/100]Test Epoch Time 30.342 (avg:30.342) Acc 0.953255 (avg:0.954981) Loss 0.154521 (avg:0.163931) 
+Epoch: [90/100][2999/3000] printfreq time 649.274 (avg:649.274) 
+TEST Epoch: [90/100]Test Epoch Time 30.145 (avg:30.145) Acc 0.967578 (avg:0.955110) Loss 0.116487 (avg:0.164150) 
+Epoch: [91/100][2999/3000] printfreq time 649.272 (avg:649.272) 
+TEST Epoch: [91/100]Test Epoch Time 30.145 (avg:30.145) Acc 0.942535 (avg:0.955227) Loss 0.222357 (avg:0.163734) 
+Epoch: [92/100][2999/3000] printfreq time 649.231 (avg:649.231) 
+TEST Epoch: [92/100]Test Epoch Time 30.155 (avg:30.155) Acc 0.958247 (avg:0.955170) Loss 0.142128 (avg:0.163326) 
+Epoch: [93/100][2999/3000] printfreq time 649.398 (avg:649.398) 
+TEST Epoch: [93/100]Test Epoch Time 30.124 (avg:30.124) Acc 0.949262 (avg:0.955168) Loss 0.196163 (avg:0.163673) 
+Epoch: [94/100][2999/3000] printfreq time 649.406 (avg:649.406) 
+TEST Epoch: [94/100]Test Epoch Time 30.147 (avg:30.147) Acc 0.950152 (avg:0.955058) Loss 0.158682 (avg:0.164474) 
+Epoch: [95/100][2999/3000] printfreq time 652.220 (avg:652.220) 
+TEST Epoch: [95/100]Test Epoch Time 30.308 (avg:30.308) Acc 0.950412 (avg:0.955204) Loss 0.173050 (avg:0.163060) 
+Epoch: [96/100][2999/3000] printfreq time 649.834 (avg:649.834) 
+TEST Epoch: [96/100]Test Epoch Time 30.201 (avg:30.201) Acc 0.963433 (avg:0.955321) Loss 0.144136 (avg:0.163624) 
+Epoch: [97/100][2999/3000] printfreq time 649.980 (avg:649.980) 
+TEST Epoch: [97/100]Test Epoch Time 30.194 (avg:30.194) Acc 0.954514 (avg:0.955087) Loss 0.157653 (avg:0.163493) 
+Epoch: [98/100][2999/3000] printfreq time 651.353 (avg:651.353) 
+TEST Epoch: [98/100]Test Epoch Time 30.191 (avg:30.191) Acc 0.964128 (avg:0.955119) Loss 0.117697 (avg:0.163410) 
+Epoch: [99/100][2999/3000] printfreq time 649.841 (avg:649.841) 
+TEST Epoch: [99/100]Test Epoch Time 30.189 (avg:30.189) Acc 0.951215 (avg:0.955066) Loss 0.179174 (avg:0.163874) 

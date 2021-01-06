@@ -1,0 +1,86 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/2.1.1
+
+Using TensorFlow backend.
+WARNING:tensorflow:From /scratch/debarpan/retina-unet/RV/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+2020-11-29 09:42:49.929239: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla P100-PCIE-12GB major: 6 minor: 0 memoryClockRate(GHz): 1.3285
+pciBusID: 0000:04:00.0
+totalMemory: 11.91GiB freeMemory: 11.66GiB
+2020-11-29 09:42:49.929356: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2020-11-29 09:42:53.136846: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-11-29 09:42:53.136972: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2020-11-29 09:42:53.137030: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2020-11-29 09:42:53.137254: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11277 MB memory) -> physical GPU (device: 0, name: Tesla P100-PCIE-12GB, pci bus id: 0000:04:00.0, compute capability: 6.0)
+2020-11-29 09:42:53.186500: I tensorflow/core/common_runtime/process_util.cc:71] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+WARNING:tensorflow:From /scratch/debarpan/retina-unet/RV/lib/python3.7/site-packages/keras/backend/tensorflow_backend.py:3368: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+
+the side H is not compatible with the selected stride of 5
+img_h 584, patch_h 48, stride_h 5
+(img_h - patch_h) MOD stride_h: 1
+So the H dim will be padded with additional 4 pixels
+the side W is not compatible with the selected stride of 5
+img_w 565, patch_w 48, stride_w 5
+(img_w - patch_w) MOD stride_w: 2
+So the W dim will be padded with additional 3 pixels
+new full images shape: 
+(10, 1, 588, 568)
+
+test images shape:
+(10, 1, 588, 568)
+
+test mask shape:
+(10, 1, 584, 565)
+test images range (min-max): 0.0 - 1.0
+test masks are within 0-1
+
+Number of patches on h : 109
+Number of patches on w : 105
+number of patches per image: 11445, totally for this dataset: 114450
+
+test PATCHES images shape:
+(114450, 1, 48, 48)
+test PATCHES images range (min-max): 0.0 - 1.0
+predicted images size :
+(114450, 2304, 2)
+N_patches_h: 109
+N_patches_w: 105
+N_patches_img: 11445
+According to the dimension inserted, there are 10 full images (of 588x568 each)
+(10, 1, 588, 568)
+Orig imgs shape: (10, 1, 584, 565)
+pred imgs shape: (10, 1, 584, 565)
+Gtruth imgs shape: (10, 1, 584, 565)
+
+
+========  Evaluate the results =======================
+Calculating results only inside the FOV:
+y scores pixels: 2269632 (radius 270: 270*270*3.14==228906), including background around retina: 3299600 (584*565==329960)
+y true pixels: 2269632 (radius 270: 270*270*3.14==228906), including background around retina: 3299600 (584*565==329960)
+
+Area under the ROC curve: 0.9313049538074019
+
+Area under Precision-Recall curve: 0.8112765487228963
+
+Confusion matrix:  Custom threshold (for positive) of 0.5
+[[1914118   74533]
+ [  72449  208532]]
+Global Accuracy: 0.9352397216817528
+Specificity: 0.9625208244181609
+Sensitivity: 0.7421569429961457
+Precision: 0.736692985709996
+
+Jaccard similarity score: 0.5865648047615565
+
+F1 score (F-measure): 0.7394148704183702
+run_testing.py:13: DeprecationWarning: This method will be removed in future versions.  Use 'parser.read_file()' instead.
+  config.readfp(open(r'./configuration.txt'))
+
+1. Create directory for the results (if not already existing)
+
+2. Run the prediction on GPU (no nohup)

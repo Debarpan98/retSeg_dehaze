@@ -1,0 +1,61 @@
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) openmpi/2.1.1
+
+
+the side H is not compatible with the selected stride of 5
+img_h 584, patch_h 48, stride_h 5
+(img_h - patch_h) MOD stride_h: 1
+So the H dim will be padded with additional 4 pixels
+the side W is not compatible with the selected stride of 5
+img_w 565, patch_w 48, stride_w 5
+(img_w - patch_w) MOD stride_w: 2
+So the W dim will be padded with additional 3 pixels
+new full images shape: 
+(10, 1, 588, 568)
+
+test images shape:
+(10, 1, 588, 568)
+
+test mask shape:
+(10, 1, 584, 565)
+test images range (min-max): 0.0 - 1.0
+test masks are within 0-1
+
+Number of patches on h : 109
+Number of patches on w : 105
+number of patches per image: 11445, totally for this dataset: 114450
+
+test PATCHES images shape:
+(114450, 1, 48, 48)
+test PATCHES images range (min-max): 0.0 - 1.0
+==> Resuming from checkpoint..
+Predictions finished
+N_patches_h: 109
+N_patches_w: 105
+N_patches_img: 11445
+According to the dimension inserted, there are 10 full images (of 588x568 each)
+(10, 1, 588, 568)
+Orig imgs shape: (10, 1, 584, 565)
+pred imgs shape: (10, 1, 584, 565)
+Gtruth imgs shape: (10, 1, 584, 565)
+
+
+========  Evaluate the results =======================
+Calculating results only inside the FOV:
+y scores pixels: 2269632 (radius 270: 270*270*3.14==228906), including background around retina: 3299600 (584*565==329960)
+y true pixels: 2269632 (radius 270: 270*270*3.14==228906), including background around retina: 3299600 (584*565==329960)
+
+Area under the ROC curve: 0.9750620212567191
+
+Area under Precision-Recall curve: 0.8856544476838208
+
+Confusion matrix:  Costum threshold (for positive) of 0.5
+[[1935203   53448]
+ [  59325  221656]]
+Global Accuracy: 0.9503122092039591
+Specificity: 0.9731234892396906
+Sensitivity: 0.7888647275082656
+Precision: 0.8057171106199837
+
+F1 score (F-measure): 0.7972018666211101

@@ -1,7 +1,7 @@
 # Evaluation of Retinal Vessel Segmentation with Dark Channel Prior dehazing
 This project depicts a comparative study of segmentation performances of different state-of-art deep learning models for retinal vessel segmentation. The DRIVE dataset has been chosen for this project as it is the most widely used and popular benchamrk dataset for retinal vessel segmentation. A dehazing technique based on dark channel prior (DCP) has ben applied for preprocessing the images along with other traditional techniques. 
 
-Please refer to [WriteUp.pdf](WriteUp.pdf) for an elaborate description for the entire project and Implementation guide.pdf for directions on how to replicate the results.
+Please refer to [WriteUp file](WriteUp.pdf) for an elaborate description for the entire project and Implementation guide.pdf for directions on how to replicate the results.
 
 
 ### Abstract

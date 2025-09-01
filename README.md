@@ -23,10 +23,10 @@ Retinal vessel analysis is very fundamental and crucial for diagnosing various k
 
 | Metric | Original (UNet) | Illumination Corrected (UNet) | Original (LadderNet)| Illumination Corrected (LadderNet) | Original (DU-Net)| Illumination Corrected (DU-Net) |
 |--------|----------|-------------------------|----------|-------------------------|----------|-------------------------|
-| GA     | 0.935    | 0.9398                  |  0.95     | 0.93                    | 0.949    | 0.948                   |
-| Spec   | 0.9625   | 0.9693                  |  0.97     | 0.96                    |  0.971    | 0.974                   |
-| Sen    | 0.7422   | 0.7319                  |  0.789    | 0.73                    |  0.797    | 0.765                   |
-| Pre    | 0.7367   | 0.7708                  |  0.86     | 0.73                    |  0.794    | 0.806                   |
+| Global Accuracy     | 0.935    | 0.9398                  |  0.95     | 0.93                    | 0.949    | 0.948                   |
+| Specificity   | 0.9625   | 0.9693                  |  0.97     | 0.96                    |  0.971    | 0.974                   |
+| Sensitivity    | 0.7422   | 0.7319                  |  0.789    | 0.73                    |  0.797    | 0.765                   |
+| Precision    | 0.7367   | 0.7708                  |  0.86     | 0.73                    |  0.794    | 0.806                   |
 | ROC    | 0.9313   | 0.9403                  | 0.975    | 0.945                   |  0.973    | 0.967                   |
 
 
